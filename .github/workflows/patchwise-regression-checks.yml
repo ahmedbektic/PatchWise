@@ -24,5 +24,13 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install .
 
+      - name: Bypass curses TUI
+        run: |
+          mkdir -p "$HOME/.config"
+          cat <<'EOF' > "$HOME/.config/patchwise_config.yaml"
+          api_key_disclaimer:
+            no_reprompt: true
+          EOF
+
       - name: Run PatchWise help
         run: patchwise --help
